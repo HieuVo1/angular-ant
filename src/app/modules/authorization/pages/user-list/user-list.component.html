@@ -1,0 +1,59 @@
+<div class="table-operations">
+  <app-user-modal [user]="selectedData" [modalTitle]="modalTitle" [isVisible]="isShowModal" [isEditMode]="isEditMode"
+    (cancelEvent)="closeModal()" (insertSuccessEvent)="insertUserSuccess($event)"
+    (updateSuccessEvent)="updateUserSuccess($event)">
+  </app-user-modal>
+  <button (click)="showModal()" class="add-btn" nzType="primary" nz-button>
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+  </button>
+</div>
+<nz-table #nzTable nzSize="small" [nzFrontPagination]="false" [nzData]="listData" [nzTotal]="total" nzBordered
+  [nzLoading]="isLoading" [nzPageSize]="baseParam.pageSize" [nzPageIndex]="baseParam.pageIndex"
+  (nzQueryParams)="onQueryParamsChange($event)" [nzScroll]="{  y: '450px' }">
+  <thead>
+    <tr>
+      <th nzColumnKey="id" [nzSortFn]="true" nzLeft>Id</th>
+      <th nzColumnKey="username" nzCustomFilter>
+        Username
+        <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+      </th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Is Active</th>
+      <th>Role Name</th>
+      <th nzAlign="center" nzWidth="30%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzTable.data;let odd=odd; let even = even" [ngClass]="{ odd: odd, even: even }">
+      <td nzLeft>{{ data.userId }}</td>
+      <td nzLeft>{{ data.username }}</td>
+      <td>{{ data.email }}</td>
+      <td>{{ data.address }}</td>
+      <td><label [nzDisabled]="true" nz-checkbox [(ngModel)]="data.isActive"></label></td>
+      <td>{{ data.roleName }}</td>
+      <td nzAlign="center" class="btn-action">
+
+        <button nz-button (click)="editUser(data)" nzType="primary">Edit<i nz-icon nzType="save"
+            nzTheme="outline"></i></button>
+
+        <button nz-button nzType="primary" nzPopconfirmOverlayClassName="delete-confirm-card" nz-popconfirm
+          nzPopconfirmTitle="Are you sure delete this user?" nzPopconfirmPlacement="left"
+          (nzOnConfirm)="deleteUser(data.userId)" nzDanger>Delete<i nz-icon nzType="delete"
+            nzTheme="outline"></i></button>
+
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+      <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

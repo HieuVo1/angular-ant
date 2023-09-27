@@ -1,0 +1,33 @@
+<div class="container">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <div class="table-operations">
+        <button (click)="syncObject()" class="add-btn" nzType="primary" nz-button>
+          Sync <span nz-icon nzType="sync" nzTheme="outline"></span>
+        </button>
+      </div>
+      <nz-table [nzLoading]="isLoading" nzSize="small" #nestedTable [nzData]="listOfData" nz [nzPageSize]="10"
+        nzTableLayout="fixed">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of listOfData">
+            <tr *ngIf="data.expand || data.type == ObjectTypes.Page || data.type == ObjectTypes.All">
+              <td [nzIndentSize]="data.type == ObjectTypes.Button ? 20 : 0"
+                [nzShowExpand]="data.type == ObjectTypes.Page" [(nzExpand)]="data.expand"
+                (nzExpandChange)="collapse(data.permissionObjectId, $event)">{{
+                ObjectTypes[data.type] }}</td>
+              <td>{{ data.name }}</td>
+              <td>{{ data.description }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<span class="notify">
+  <nz-badge [nzCount]="listNotify.length">
+    <button (click)="updateNumUnread()" nz-popconfirm nzPopconfirmOverlayClassName="notify-card"
+      [nzPopconfirmTitle]="notify" nzPopconfirmPlacement="bottom" nz-button nzType="default" nzShape="circle"><i nz-icon
+        nzType="bell" nzTheme="outline"></i></button>
+  </nz-badge>
+</span>
+<ng-template #notify>
+  <div class="notify-header">
+    Notifications
+  </div>
+  <div class="notify-content" *ngIf="listNotify.length > 0;else noNotify">
+    <div *ngFor="let item of listNotify" [routerLink]="['/admin/order/detail',item.orderId]" class="notify-item">
+      <div class="notify-icon">
+        <i nz-icon nzType="info-circle" style="font-size: 30px; color: #08c;" nzTheme="outline"></i>
+      </div>
+      <div class="notify-message">
+        <h5>{{item.content}}</h5>
+        <p>{{item.created_At}}</p>
+      </div>
+    </div>
+  </div>
+  <div [routerLink]="['/admin/order']" class="notify-footer">
+    View all
+  </div>
+</ng-template>
+
+<ng-template #noNotify>
+  <div class="notFound">
+    <img src="https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg" alt="not found">
+    <div>You have viewed all notifications.</div>
+  </div>
+</ng-template>

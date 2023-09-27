@@ -1,0 +1,24 @@
+<nz-modal [(nzVisible)]="isVisible" nzOkText="OK" nzClassName="form-modal" nzTitle="ADD PERMISSION" [nzClosable]="false"
+  [nzOkDisabled]="baseForm.invalid" [nzWidth]="600" [nzOkLoading]="isLoadingButton" (nzOnCancel)="cancelModal()"
+  (nzOnOk)="submitForm()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="baseForm">
+      <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="24">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="permissionObjectId">Object</nz-form-label>
+            <nz-form-control [nzSpan]="14" nzErrorTip="Please input your role description!">
+              <nz-select formControlName="permissionObjectId" [nzLoading]="isLoadPermissionObj" nzShowSearch
+                nzAllowClear nzPlaceHolder="Select a object">
+                <nz-option *ngFor="let permissionObject of permissionObjects"
+                  [nzLabel]="permissionObject.permissionObjectId +' - '+ permissionObject.name"
+                  [nzValue]="permissionObject.permissionObjectId">
+                </nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</nz-modal>

@@ -1,0 +1,20 @@
+<nz-modal [(nzVisible)]="isVisible" nzOkText="OK" nzClassName="form-modal" [nzTitle]="modalTitle" [nzClosable]="false"
+  [nzOkDisabled]="baseForm.invalid " [nzOkLoading]="isLoadingButton" (nzOnCancel)="cancelModal()"
+  (nzOnOk)="submitForm()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="baseForm">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzFor="name">Name</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Please input your role name!">
+          <input nz-input type="text" formControlName="name">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzFor="description">Description</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Please input your role description!">
+          <input nz-input type="text" formControlName="description">
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>

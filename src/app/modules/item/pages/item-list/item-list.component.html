@@ -1,0 +1,39 @@
+<nz-table #columnTable [nzData]="listOfDisplayData" [nzScroll]="{ x: '150px', y: '240px' }">
+  <thead>
+    <tr>
+      <th nzCustomFilter nzLeft>
+        Name
+        <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+      </th>
+      <th>Age</th>
+      <th>Address</th>
+      <th *ngxPermissionsOnly="['deleteItem','updateItem']" nzAlign="center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of columnTable.data">
+      <td nzLeft>{{ data.name }}</td>
+      <td>{{ data.age }}</td>
+      <td>{{ data.address }}</td>
+      <td *ngxPermissionsOnly="['deleteItem','updateItem']" nzAlign="center" class="btn-action">
+        <button *ngxPermissionsOnly="['deleteItem']" nz-button nzType="primary"
+          nzPopconfirmOverlayClassName="delete-confirm-card" nz-popconfirm
+          nzPopconfirmTitle="Are you sure delete this size?" nzPopconfirmPlacement="left" nzDanger>Delete<i nz-icon
+            nzType="delete" nzTheme="outline"></i></button>
+        <button *ngxPermissionsOnly="['updateItem']" nz-button (click)="editProduct(data)" nzType="primary">Edit<i
+            nz-icon nzType="edit" nzTheme="outline"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+      <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

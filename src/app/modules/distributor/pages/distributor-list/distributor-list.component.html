@@ -1,0 +1,91 @@
+<div class="table-operations btn-action">
+  <button *ngxPermissionsOnly="[permissionSchema.insert, permissionSchema.all]" (click)="addNew()" class="add-btn"
+    nzType="primary" nz-button>
+    Add <i nz-icon nzType="plus" nzTheme="outline"></i>
+  </button>
+  <button *ngxPermissionsOnly="[permissionSchema.custom, permissionSchema.all]" (click)="addNew()" class="add-btn"
+    nzType="primary" nz-button>
+    Custom <i nz-icon nzType="plus" nzTheme="outline"></i>
+  </button>
+</div>
+<nz-table #nzTable nzSize="small" [nzFrontPagination]="false" [nzData]="listData" [nzTotal]="total" nzBordered
+  [nzLoading]="isLoading" [nzPageSize]="baseParam.pageSize" [nzPageIndex]="baseParam.pageIndex"
+  (nzQueryParams)="onQueryParamsChange($event)" [nzScroll]="{ x: '1500px', y: '380px' }">
+  <thead>
+    <tr>
+      <th nzColumnKey="code" [nzSortFn]="true" nzLeft>Code</th>
+      <th nzColumnKey="description" nzCustomFilter>
+        Description
+        <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+      </th>
+      <th>Index 1 Code</th>
+      <th>Index 2 Code</th>
+      <th>Index 3 Code</th>
+      <th>Index 4 Code</th>
+      <th>Index 5 Code</th>
+      <th nzColumnKey="main" [nzFilters]="listOfFilter" [nzFilterFn]="true">Main</th>
+      <th nzColumnKey="active" [nzFilters]="listOfFilter" [nzFilterFn]="true">Active</th>
+      <th nzAlign="center"
+        *ngxPermissionsOnly="[ permissionSchema.all, permissionSchema.delete, permissionSchema.modify]" nzWidth="15%">
+        Action
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzTable.data;let odd=odd; let even = even" [ngClass]="{ odd: odd, even: even }">
+      <ng-container *ngIf="!editCache[data.code].edit; else editTemplate">
+        <td nzLeft>{{ data.code }}</td>
+        <td>{{ data.description }}</td>
+        <td>{{ data.distributorH1Index1Code }}</td>
+        <td>{{ data.distributorH1Index2Code }}</td>
+        <td>{{ data.distributorH1Index3Code }}</td>
+        <td>{{ data.distributorH1Index4Code }}</td>
+        <td>{{ data.distributorH1Index5Code }}</td>
+        <td><label [nzDisabled]="true" nz-checkbox [ngModel]="data.main"></label></td>
+        <td><label [nzDisabled]="true" nz-checkbox [ngModel]="data.active"></label></td>
+        <td nzAlign="center"
+          *ngxPermissionsOnly="[ permissionSchema.all, permissionSchema.delete, permissionSchema.modify]"
+          class="btn-action">
+          <button nz-button *ngxPermissionsOnly="[permissionSchema.all, permissionSchema.delete]" nzType="primary"
+            nzPopconfirmOverlayClassName="delete-confirm-card" nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this distributor?" nzPopconfirmPlacement="left"
+            (nzOnConfirm)="delete(data.code)" nzDanger>Delete<i nz-icon nzType="delete" nzTheme="outline"></i></button>
+
+          <button nz-button *ngxPermissionsOnly="[permissionSchema.all, permissionSchema.modify]"
+            (click)="editProduct(data.code)" nzType="primary">Edit<i nz-icon nzType="edit"
+              nzTheme="outline"></i></button>
+        </td>
+      </ng-container>
+      <ng-template #editTemplate>
+        <td nzLeft>{{ data.code }}</td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[data.code].data.description" /></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[data.code].data.distributorH1Index1Code" /></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[data.code].data.distributorH1Index2Code" /></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[data.code].data.distributorH1Index3Code" /></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[data.code].data.distributorH1Index4Code" /></td>
+        <td><input type="text" nz-input [(ngModel)]="editCache[data.code].data.distributorH1Index5Code" /></td>
+        <td><label nz-checkbox [(ngModel)]="editCache[data.code].data.main"></label></td>
+        <td><label nz-checkbox [(ngModel)]="editCache[data.code].data.active"></label></td>
+        <td class="btn-action">
+          <button nz-button nzType="primary" nzPopconfirmOverlayClassName="delete-confirm-card" nz-popconfirm
+            nzPopconfirmTitle="Are you sure cancel?" nzPopconfirmPlacement="left" (nzOnConfirm)="cancelEdit(data.code)"
+            nzDanger>Cancel<i nz-icon nzType="delete" nzTheme="outline"></i></button>
+
+          <button nz-button (click)="saveEdit(data.code)" nzType="primary">Save<i nz-icon nzType="save"
+              nzTheme="outline"></i></button>
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+      <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

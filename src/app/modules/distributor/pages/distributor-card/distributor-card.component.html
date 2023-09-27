@@ -1,0 +1,208 @@
+<div class="container">
+  <form nz-form [formGroup]="distributorForm">
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="code">Distributor Code</nz-form-label>
+          <nz-form-control [nzSpan]="14" nzErrorTip="Please input your distributor code!">
+            <input nz-input type="text" formControlName="code">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="description">Description</nz-form-label>
+          <nz-form-control [nzSpan]="14" nzErrorTip="Please input your description!">
+            <input nz-input type="text" formControlName="description">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH1Index1Code">Index1 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH1Index1Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH1Index2Code">Index2 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH1Index2Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH1Index3Code">Index3 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH1Index3Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH1Index4Code">Index4 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH1Index4Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH1Index5Code">Index5 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH1Index5Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH2Index1Code">Index 6 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH2Index1Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH2Index2Code">Index7 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH2Index2Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH2Index3Code">Index 8 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH2Index3Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH2Index4Code">Index9 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH2Index4Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="distributorH2Index5Code">Index 10 Code</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select [nzLoading]="false" formControlName="distributorH2Index5Code" nzShowSearch nzAllowClear
+              nzPlaceHolder="Select a category">
+              <nz-option *ngFor="let item of listOfOption" [nzLabel]="item.label" [nzValue]="item.value">
+              </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="main">Main</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <label formControlName="main" nz-checkbox></label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="active">Active</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <label formControlName="active" nz-checkbox></label>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <button nz-button (click)="addRow()" nzType="primary">Add</button>
+      <br />
+      <br />
+      <nz-table #editRowTable nzBordered [nzData]="listOfData">
+        <thead>
+          <tr>
+            <th nzWidth="30%">Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of editRowTable.data" class="editable-row">
+            <td>
+              <div class="editable-cell" [hidden]="editId === data.id" (click)="startEdit(data.id)">
+                {{ data.name }}
+              </div>
+
+              <input [hidden]="editId !== data.id" type="text" nz-input [(ngModel)]="data.name" (blur)="stopEdit()" />
+            </td>
+            <td>{{ data.age }}</td>
+            <td>{{ data.address }}</td>
+            <td>
+              <a nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(data.id)">Delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+  <div class="btn-submit">
+    <button nz-button [nzLoading]="isLoadingButtonSubmit" [disabled]="distributorForm.invalid" (click)="submitForm()"
+      nzType="primary">Save change</button>
+  </div>
+  <nz-spin [ngClass]="{'isLoading':isLoadingProductEdit}" [nzSpinning]="isLoadingProductEdit" nzSimple></nz-spin>
+</div>

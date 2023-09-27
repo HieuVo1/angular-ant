@@ -1,0 +1,65 @@
+<div class="container">
+  <form nz-form [formGroup]="roleForm">
+    <div nz-row [nzGutter]="24">
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="name">Role Name</nz-form-label>
+          <nz-form-control [nzSpan]="14" nzErrorTip="Please input your role name!">
+            <input nz-input type="text" formControlName="name">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="6" nzFor="description">Description</nz-form-label>
+          <nz-form-control [nzSpan]="14" nzErrorTip="Please input your role description!">
+            <input nz-input type="text" formControlName="description">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="24">
+      <div class="table-operations">
+        <app-permission-modal [isVisible]="isShowModal" (cancelEvent)="closeModal()"
+          (insertSuccessEvent)="insertRoleSuccess($event)">
+        </app-permission-modal>
+        <button (click)="showModal()" class="add-btn" nzType="primary" nz-button>
+          <i nz-icon nzType="plus" nzTheme="outline"></i>
+        </button>
+      </div>
+      <nz-table nzSize="small" #nestedTable [nzData]="listOfData" nz [nzPageSize]="10" nzTableLayout="fixed">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th nzAlign="center">View</th>
+            <th nzAlign="center" nzWidth="30%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let data of listOfData">
+            <tr *ngIf="data.expand || data.type == ObjectTypes.Page || data.type == ObjectTypes.All">
+              <td [nzIndentSize]="data.type == ObjectTypes.Button ? 20 : 0"
+                [nzShowExpand]="data.type == ObjectTypes.Page" [(nzExpand)]="data.expand"
+                (nzExpandChange)="collapse(data.permissionObjectId, $event)">{{
+                ObjectTypes[data.type] }}</td>
+              <td>{{ data.name }}</td>
+              <td [(nzChecked)]="data.viewPermission"
+                (nzCheckedChange)="refreshStatus(data.permissionObjectId ,$event)"></td>
+              <td nzAlign="center" class="btn-action">
+                <button *ngIf="!data.parentPermissionObjId" nz-button nzType="primary"
+                  nzPopconfirmOverlayClassName="delete-confirm-card" nz-popconfirm
+                  nzPopconfirmTitle="Are you sure delete this permission?" nzPopconfirmPlacement="left"
+                  (nzOnConfirm)="delete( data.permissionObjectId)" nzDanger>Delete<i nz-icon nzType="delete"
+                    nzTheme="outline"></i></button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+  <nz-spin [ngClass]="{'isLoading': isLoading}" [nzSpinning]="isLoading" nzSimple></nz-spin>
+</div>

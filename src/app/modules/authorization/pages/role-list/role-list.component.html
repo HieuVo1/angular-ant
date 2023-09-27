@@ -1,0 +1,55 @@
+<div class="table-operations">
+  <app-role-modal [role]="selectedData" [modalTitle]="modalTitle" [isVisible]="isShowModal" [isEditMode]="isEditMode"
+    (cancelEvent)="closeModal()" (insertSuccessEvent)="insertRoleSuccess($event)"
+    (updateSuccessEvent)="updateRoleSuccess($event)">
+  </app-role-modal>
+  <button (click)="showModal()" class="add-btn" nzType="primary" nz-button>
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+  </button>
+</div>
+<nz-table #nzTable nzSize="small" [nzFrontPagination]="false" [nzData]="listData" [nzTotal]="total" nzBordered
+  [nzLoading]="isLoading" [nzPageSize]="baseParam.pageSize" [nzPageIndex]="baseParam.pageIndex"
+  (nzQueryParams)="onQueryParamsChange($event)" [nzScroll]="{  y: '450px' }">
+  <thead>
+    <tr>
+      <th nzColumnKey="id" [nzSortFn]="true" nzLeft>Id</th>
+      <th nzColumnKey="name" nzCustomFilter>
+        Name
+        <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+      </th>
+      <th>Description</th>
+      <th nzAlign="center" nzWidth="30%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of nzTable.data;let odd=odd; let even = even" [ngClass]="{ odd: odd, even: even }">
+      <td nzLeft>{{ data.roleId }}</td>
+      <td nzLeft>{{ data.name }}</td>
+      <td>{{ data.description }}</td>
+      <td nzAlign="center" class="btn-action">
+
+        <button nz-button (click)="editRole(data)" nzType="primary">Edit<i nz-icon nzType="save"
+            nzTheme="outline"></i></button>
+
+        <button nz-button nzType="primary" nzPopconfirmOverlayClassName="delete-confirm-card" nz-popconfirm
+          nzPopconfirmTitle="Are you sure delete this role?" nzPopconfirmPlacement="left"
+          (nzOnConfirm)="deleteRole(data.roleId)" nzDanger>Delete<i nz-icon nzType="delete"
+            nzTheme="outline"></i></button>
+
+        <button nz-button (click)="viewPermissions(data.roleId)" nzType="primary">Permissions<i nz-icon
+            nzType="usergroup-delete" nzTheme="outline"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+      <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
