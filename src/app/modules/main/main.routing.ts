@@ -46,7 +46,6 @@ export const routes: Routes = [
       {
         path: 'authorization',
         data: {
-          breadcrumb: 'Authorization',
           permissions: {
             only: [permissionSchema.all],
             redirectTo: 'auth/unauthorized'
@@ -55,6 +54,11 @@ export const routes: Routes = [
         canLoad: [NgxPermissionsGuard],
         loadChildren: () =>
           import('../authorization/authorization.module').then((m) => m.AuthorizationModule),
+      },
+      {
+        path: 'user',
+        loadChildren: () =>
+          import('../user/user.module').then((m) => m.UserModule),
       }
     ]
 

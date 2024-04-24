@@ -57,4 +57,13 @@ export class TokenService {
     }
     return 0;
   }
+
+
+  getImageUrl(): string {
+    const user = this.storageService.getValue<TokenData>(environment.tokenKey);
+    if (user != null) {
+      return user.imageUrl;
+    }
+    return '';
+  }
 }

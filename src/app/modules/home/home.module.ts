@@ -6,6 +6,7 @@ import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { HomeComponent } from './pages/home/home.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzStatisticModule,
     NzGridModule,
     NzCardModule,
+    NgxChartsModule,
     RouterModule.forChild(routes)
   ]
 })

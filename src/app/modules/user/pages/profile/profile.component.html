@@ -1,0 +1,71 @@
+<div class="container">
+  <form nz-form [formGroup]="userUpdateForm">
+    <div class="seller-info section">
+      <div class="content">
+        <div class="column">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="fullName">Full Name</nz-form-label>
+            <nz-form-control [nzSpan]="14" nzErrorTip="Please input your full name!">
+              <input nz-input type="text" formControlName="fullName">
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="sellerName">Email</nz-form-label>
+            <nz-form-control nzValidatingTip="Validating..." nzHasFeedback [nzSpan]="14" [nzErrorTip]="userErrorTpl">
+              <input nz-input formControlName="email" id="email" />
+              <ng-template #userErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Please input your email!
+                </ng-container>
+                <ng-container *ngIf="control.hasError('duplicated')">
+                  The email is already in use!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="phone">Phone</nz-form-label>
+            <nz-form-control [nzSpan]="14" nzErrorTip="Please input your phone!">
+              <input nz-input type="text" formControlName="phone">
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="address">Address</nz-form-label>
+            <nz-form-control [nzSpan]="14" nzErrorTip="Please input your address!">
+              <input nz-input type="text" formControlName="address">
+            </nz-form-control>
+          </nz-form-item>
+
+        </div>
+        <div class="column">
+          <div class="content user-profile-image">
+            <nz-upload [nzBeforeUpload]="beforeUpload" [nzAccept]="contentTypeAccept" nzName="files"
+              nzListType="picture-card" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1">
+            </nz-upload>
+          </div>
+
+
+          <!-- <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="gender">Gender</nz-form-label>
+            <nz-form-control class="radio-btn" [nzSpan]="14" nzErrorTip="Please input your gender!">
+              <nz-radio-group formControlName="gender">
+                <label nz-radio [nzValue]="0">Male</label>
+                <label nz-radio [nzValue]="1">Female</label>
+                <label nz-radio [nzValue]="2">Other</label>
+              </nz-radio-group>
+            </nz-form-control>
+          </nz-form-item> -->
+        </div>
+
+      </div>
+      <div class="btn-submit">
+        <button nz-button [disabled]="userUpdateForm.invalid" (click)="submitForm()" nzType="primary">Save <span nz-icon
+            nzType="save" nzTheme="outline"></span></button>
+      </div>
+    </div>
+
+  </form>
+
+  <nz-spin [ngClass]="{'isLoading':isLoading}" [nzSpinning]="isLoading" nzSimple></nz-spin>
+</div>

@@ -1,3 +1,8 @@
+<div class="table-operations btn-action">
+  <button (click)="viewAttachments()" class="add-btn" nzType="primary" nz-button>
+    Attachments <span nz-icon nzType="paper-clip" nzTheme="outline"></span>
+  </button>
+</div>
 <div class="container">
   <form nz-form [formGroup]="distributorForm">
     <div nz-row [nzGutter]="24">
@@ -202,7 +207,10 @@
   </div>
   <div class="btn-submit">
     <button nz-button [nzLoading]="isLoadingButtonSubmit" [disabled]="distributorForm.invalid" (click)="submitForm()"
-      nzType="primary">Save change</button>
+      nzType="primary">Save <span nz-icon nzType="save" nzTheme="outline"></span></button>
   </div>
   <nz-spin [ngClass]="{'isLoading':isLoadingProductEdit}" [nzSpinning]="isLoadingProductEdit" nzSimple></nz-spin>
 </div>
+
+<app-attachment-list [isVisible]="isVisibleAttachment" [documentRefName]="documentName" [documentRefId]="1"
+  (cancelEvent)="closeModal()"></app-attachment-list>

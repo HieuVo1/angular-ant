@@ -16,7 +16,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NotificationComponent } from 'src/app/layouts/notification/notification.component';
-
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { NotificationComponent } from 'src/app/layouts/notification/notification
     NzButtonModule,
     NzBreadCrumbModule,
     NzPageHeaderModule,
+    NzCardModule,
     NgxPermissionsModule.forChild()
   ]
 })

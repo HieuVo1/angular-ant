@@ -26,7 +26,7 @@ export class AuthService {
   ) { }
 
   login(request: LoginRequest): Observable<BaseResponse<LoginResponse>> {
-    return this.httpClient.post<BaseResponse<LoginResponse>>(`${environment.userServiceUrl}/api/users/login`, request)
+    return this.httpClient.post<BaseResponse<LoginResponse>>(`${environment.backendUrl}/api/users/login`, request)
       .pipe(
         tap(result => {
           if (result.isSuccess) {

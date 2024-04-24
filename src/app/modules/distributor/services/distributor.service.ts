@@ -30,7 +30,7 @@ export class DistributorService {
       });
     }
 
-    return this.httpClient.get<BaseResponse<PaginatedResponse<Distributor>>>(`${environment.userServiceUrl}/api/distributors`, { params }).pipe(
+    return this.httpClient.get<BaseResponse<PaginatedResponse<Distributor>>>(`${environment.backendUrl}/api/distributors`, { params }).pipe(
       catchError((error) => {
         return of(error.error);
       })
@@ -38,7 +38,7 @@ export class DistributorService {
   }
 
   delete(code: string): Observable<BaseResponse<boolean>> {
-    return this.httpClient.delete<BaseResponse<boolean>>(`${environment.userServiceUrl}/api/distributors/${code}`)
+    return this.httpClient.delete<BaseResponse<boolean>>(`${environment.backendUrl}/api/distributors/${code}`)
       .pipe(
         catchError((error) => {
           return of(error.error);
@@ -47,14 +47,21 @@ export class DistributorService {
   }
 
   update(distributor: Distributor): Observable<BaseResponse<Distributor>> {
-    return this.httpClient.patch<BaseResponse<Distributor>>(`${environment.userServiceUrl}/api/distributors`, distributor)
+    return this.httpClient.patch<BaseResponse<Distributor>>(`${environment.backendUrl}/api/distributors`, distributor)
       .pipe(
         catchError((error) => { return of(error.error) })
       )
   }
 
-  create(distributor: Distributor): Observable<BaseResponse<Distributor>> {
-    return this.httpClient.post<BaseResponse<Distributor>>(`${environment.userServiceUrl}/api/distributors`, distributor)
+  create(distributor: Distributor[]): Observable<BaseResponse<Distributor[]>> {
+    return this.httpClient.post<BaseResponse<Distributor[]>>(`${environment.backendUrl}/api/distributors`, distributor)
+      .pipe(
+        catchError((error) => { return of(error.error) })
+      )
+  }
+
+  import(distributor: Distributor[]): Observable<BaseResponse<PaginatedResponse<Distributor>>> {
+    return this.httpClient.post<BaseResponse<PaginatedResponse<Distributor>>>(`${environment.backendUrl}/api/distributors/import`, distributor)
       .pipe(
         catchError((error) => { return of(error.error) })
       )

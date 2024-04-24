@@ -4,9 +4,12 @@ import { finalize } from 'rxjs';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { BaseParam } from 'src/app/core/models/base-param';
 import { Router } from '@angular/router';
-import { Distributor } from '../../models/distributor';
 import { PermissionPage } from 'src/app/core/models/permission-page';
 import { Buttons, Pages } from 'src/permissions/permission-schema';
+import { read, utils, writeFile } from 'xlsx';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Distributor } from '../../models/distributor';
 
 @Component({
   selector: 'app-distributor-list',
@@ -28,8 +31,11 @@ export class DistributorListComponent implements PermissionPage, OnInit {
   permissionSchema: any;
 
   editCache: { [key: string]: { edit: boolean; data: Distributor } } = {};
-
-  constructor(private distributorService: DistributorService, private router: Router) {
+  uploading = false;
+  uploadingFile: boolean = false;
+  constructor(private distributorService: DistributorService,
+    private router: Router,
+    private readonly messageService: NzMessageService) {
   }
 
   ngOnInit(): void {
@@ -42,7 +48,8 @@ export class DistributorListComponent implements PermissionPage, OnInit {
       delete: Buttons.Delete + Pages.Distributor,
       insert: Buttons.Delete + Pages.Distributor,
       modify: Buttons.Modify + Pages.Distributor,
-      custom: Buttons.Custom + Pages.Distributor
+      upload: Buttons.Upload + Pages.Distributor,
+      download: Buttons.Download + Pages.Distributor
     }
   }
 
@@ -56,8 +63,8 @@ export class DistributorListComponent implements PermissionPage, OnInit {
 
     this.baseParam.pageIndex = pageIndex;
     this.baseParam.pageSize = pageSize;
-    this.baseParam.sortField = (currentSort && currentSort.key) || null;
-    this.baseParam.sortOrder = (currentSort && currentSort.value) || null;
+    this.baseParam.sortOrder = (currentSort && currentSort.value) || undefined;
+    this.baseParam.sortField = (currentSort && currentSort.key) || undefined;
     this.baseParam.filters = filter.filter(f => f.value.length > 0);
 
 
@@ -144,4 +151,44 @@ export class DistributorListComponent implements PermissionPage, OnInit {
       }
     });
   }
+
+  handleExport() {
+    const wb = utils.book_new();
+    const ws: any = utils.json_to_sheet([]);
+    // utils.sheet_add_aoa(ws, headings);
+    utils.sheet_add_json(ws, this.listData, { origin: 'A1', skipHeader: false });
+    utils.book_append_sheet(wb, ws, 'Report');
+    writeFile(wb, 'Distributor.xlsx');
+  }
+
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.uploadingFile = true;
+
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      const wb = read(event.target.result);
+      const sheets = wb.SheetNames;
+
+      if (sheets.length) {
+
+        const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]) as Distributor[];
+        this.distributorService.import(rows).pipe(
+          finalize(() => this.uploadingFile = false)
+        ).subscribe((response) => {
+          if (response.isSuccess) {
+            this.listData = response.data.data;
+            this.total = response.data.count;
+            this.baseParam.pageIndex = 1;
+            this.updateEditCache();
+            this.messageService.create('success', 'Update data successfully!');
+          }
+          else {
+            this.messageService.create('error', response.errorMessage);
+          }
+        })
+      }
+    }
+    reader.readAsArrayBuffer(file as any);
+    return false;
+  };
 }

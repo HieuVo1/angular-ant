@@ -1,17 +1,4 @@
-<div style="background: #ECECEC; padding: 30px;">
-  <nz-row [nzGutter]="16">
-    <nz-col [nzSpan]="12">
-      <nz-card>
-        <nz-statistic [nzValue]="(11.28 | number: '1.0-2')!" [nzTitle]="'Active'" [nzPrefix]="prefixTplOne"
-          [nzSuffix]="'%'" [nzValueStyle]="{ color: '#3F8600' }"></nz-statistic>
-        <ng-template #prefixTplOne><span nz-icon nzType="arrow-up"></span></ng-template>
-      </nz-card>
-    </nz-col>
-    <nz-col [nzSpan]="12">
-      <nz-card>
-        <nz-statistic [nzValue]="(1128 | number)!" [nzTitle]="'Feedback'" [nzPrefix]="prefixTpl"></nz-statistic>
-        <ng-template #prefixTpl><span nz-icon nzType="like"></span></ng-template>
-      </nz-card>
-    </nz-col>
-  </nz-row>
-</div>
+<ngx-charts-bar-vertical [scheme]="colorScheme" [results]="single" [gradient]="gradient" [xAxis]="showXAxis"
+  [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+</ngx-charts-bar-vertical>

@@ -15,3 +15,11 @@
 .search-button {
   margin-right: 8px;
 }
+
+.table-operations {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  float: none;
+  justify-content: space-between;
+}

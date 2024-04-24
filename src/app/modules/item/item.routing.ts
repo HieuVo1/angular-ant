@@ -9,6 +9,9 @@ export const routes: Routes = [
   },
   {
     path: 'card',
+    data: {
+      breadcrumb: 'Add Item',
+    },
     component: ItemCardComponent
   }
 ]

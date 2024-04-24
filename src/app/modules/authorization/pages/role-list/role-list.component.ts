@@ -32,8 +32,8 @@ export class RoleListComponent {
 
     this.baseParam.pageIndex = pageIndex;
     this.baseParam.pageSize = pageSize;
-    this.baseParam.sortField = (currentSort && currentSort.key) || null;
-    this.baseParam.sortOrder = (currentSort && currentSort.value) || null;
+    this.baseParam.sortField = (currentSort && currentSort.key) || undefined;
+    this.baseParam.sortOrder = (currentSort && currentSort.value) || undefined;
     this.baseParam.filters = filter.filter(f => f.value.length > 0);
 
 

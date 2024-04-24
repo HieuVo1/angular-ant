@@ -14,7 +14,7 @@
           </ng-template>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item>
+      <nz-form-item *ngIf="!isEditMode">
         <nz-form-label [nzSpan]="6" nzFor="password">Password</nz-form-label>
         <nz-form-control [nzSpan]="14" [nzErrorTip]="passwordErrorTpl">
           <input nz-input type="password" formControlName="password">
@@ -23,7 +23,7 @@
               Your password must have at least 8 characters.
             </ng-container>
             <ng-container *ngIf="control.hasError('passwordStrength')">
-              Your password must have lower case, upper case and numeric characters.
+              Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number
             </ng-container>
           </ng-template>
         </nz-form-control>

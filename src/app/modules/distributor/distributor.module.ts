@@ -19,6 +19,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { AttachmentModule } from '../attachment/attachment.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
     NzGridModule,
     NzMessageModule,
     NzCollapseModule,
+    NzUploadModule,
+    AttachmentModule,
     NgxPermissionsModule.forChild()
   ]
 })

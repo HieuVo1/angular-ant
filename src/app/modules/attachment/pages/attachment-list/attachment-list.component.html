@@ -1,0 +1,47 @@
+<nz-modal [(nzVisible)]="isVisible" nzOkText="OK" nzClassName="form-modal" nzTitle="ATTACHMENTS"
+  (nzOnCancel)="handleCancel()" [nzWidth]="'70%'" [nzFooter]="null">
+  <ng-container *nzModalContent>
+    <div class="table-operations btn-action">
+      <nz-upload [nzBeforeUpload]="beforeUpload" [nzMultiple]="true">
+        <button nz-button>
+          <span nz-icon nzType="upload"></span>
+          Upload
+        </button>
+      </nz-upload>
+    </div>
+    <nz-table #sortTable [nzLoading]="isLoading" [nzData]="listOfData" [nzShowPagination]="false" nzBordered
+      [nzTableLayout]="'auto'" [nzScroll]="{x : '100%', y:'380px'}">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th nzWidth="20%">File Name</th>
+          <th>File Extension</th>
+          <th nzWidth="20%">File Type</th>
+          <th>Attached Date</th>
+          <th>Attached By</th>
+          <th nzWidth="20%">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of sortTable.data">
+          <td>{{ data.attachmentId }}</td>
+          <td><a target="_blank" [href]="data.fileUrl">{{data.fileName}}</a></td>
+          <td>{{ data.fileExtension }}</td>
+          <td>{{ data.fileType }}</td>
+          <td>{{ data.attachedDate | date: 'medium'}}</td>
+          <td>{{ data.attachedByName }}</td>
+          <td nzWidth="25%" nzAlign="center" class="btn-action">
+            <button nz-button nzType="primary" nzPopconfirmOverlayClassName="delete-confirm-card" nz-popconfirm
+              nzPopconfirmTitle="Are you sure delete this attachment?" nzPopconfirmPlacement="left"
+              (nzOnConfirm)="delete(data.attachmentId)" nzDanger>Delete<i nz-icon nzType="delete"
+                nzTheme="outline"></i></button>
+            <button (click)="handleExport()" class="add-btn" nzType="primary" nz-button>
+              Download
+              <span nz-icon nzType="download"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </ng-container>
+</nz-modal>

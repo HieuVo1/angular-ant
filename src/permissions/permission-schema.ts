@@ -12,9 +12,8 @@ export const Buttons = {
   Insert: 'Insert',
   Modify: 'Modify',
   Delete: 'Delete',
-  Custom: 'Custom',
-  Import: 'Import',
-  Export: 'Export'
+  Upload: 'Upload',
+  Download: 'Download'
 }
 
 export const globalPermissionObjectSchema: PermissionObjectCreate[] = [
@@ -45,8 +44,13 @@ export const globalPermissionObjectSchema: PermissionObjectCreate[] = [
       },
       {
         type: ObjectType.Button,
-        name: Buttons.Import,
-        description: 'Import Button',
+        name: Buttons.Upload,
+        description: 'Upload Button',
+      },
+      {
+        type: ObjectType.Button,
+        name: Buttons.Download,
+        description: 'Download Button',
       },
     ]
   },

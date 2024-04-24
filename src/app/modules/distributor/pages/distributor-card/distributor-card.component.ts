@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Distributor } from '../../models/distributor';
 import { DistributorService } from '../../services/distributor.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Pages } from 'src/permissions/permission-schema';
 interface ItemData {
   id: string;
   name: string;
@@ -15,11 +16,13 @@ interface ItemData {
   styleUrls: ['./distributor-card.component.css']
 })
 export class DistributorCardComponent {
-
+  isVisibleAttachment!: boolean;
   listOfOption: Array<{ label: string; value: string }> = [];
   distributorForm: FormGroup;
   isLoadingButtonSubmit: boolean = false;
   isLoadingProductEdit: boolean = false;
+  documentName = Pages.Distributor;
+
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly distributorService: DistributorService,
@@ -52,7 +55,7 @@ export class DistributorCardComponent {
   submitForm() {
     this.isLoadingButtonSubmit = true;
     const distributor = this.distributorForm.value as Distributor;
-    this.distributorService.create(distributor).subscribe(res => {
+    this.distributorService.create([distributor]).subscribe(res => {
       if (res.isSuccess) {
         this.messageService.create('success', `Create distributor successfully!`);
         this.distributorForm.reset();
@@ -60,6 +63,7 @@ export class DistributorCardComponent {
       this.isLoadingButtonSubmit = false;
     });
   }
+
   listOfData: ItemData[] = [];
   i = 0;
   editId: string | null = null;
@@ -92,5 +96,13 @@ export class DistributorCardComponent {
   ngOnInit(): void {
     this.addRow();
     this.addRow();
+  }
+
+  viewAttachments() {
+    this.isVisibleAttachment = true;
+  }
+
+  closeModal() {
+    this.isVisibleAttachment = false;
   }
 }

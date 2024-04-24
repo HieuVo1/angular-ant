@@ -6,7 +6,24 @@
   </nz-badge>
 </span>
 <ng-template #notify>
-  <div class="notify-header">
+  <nz-card nzTitle="Notifications">
+    <div nz-card-grid [ngStyle]="gridStyle" *ngFor="let item of listNotify" class="notify-item">
+      <div class="notify-icon">
+        <i nz-icon nzType="info-circle" style="font-size: 30px; color: #08c;" nzTheme="outline"></i>
+      </div>
+      <div class="notify-message">
+        <h5>{{item.content}}</h5>
+        <p>{{item.created_At | date:'medium'}}</p>
+      </div>
+    </div>
+    <!-- <div nz-card-grid [ngStyle]="gridStyle">Content</div>
+    <div nz-card-grid [ngStyle]="gridStyle">Content</div>
+    <div nz-card-grid [ngStyle]="gridStyle">Content</div>
+    <div nz-card-grid [ngStyle]="gridStyle">Content</div>
+    <div nz-card-grid [ngStyle]="gridStyle">Content</div>
+    <div nz-card-grid [ngStyle]="gridStyle">Content</div> -->
+  </nz-card>
+  <!-- <div class="notify-header">
     Notifications
   </div>
   <div class="notify-content" *ngIf="listNotify.length > 0;else noNotify">
@@ -22,7 +39,8 @@
   </div>
   <div [routerLink]="['/admin/order']" class="notify-footer">
     View all
-  </div>
+  </div> -->
+
 </ng-template>
 
 <ng-template #noNotify>

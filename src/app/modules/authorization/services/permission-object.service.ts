@@ -15,7 +15,7 @@ export class PermissionObjectService {
   constructor(private readonly httpClient: HttpClient) { }
 
   add(permission: PermissionObjectCreate[]): Observable<BaseResponse<PermissionObject[]>> {
-    return this.httpClient.post<BaseResponse<PermissionObject[]>>(`${environment.userServiceUrl}/api/permissionobjects`, permission)
+    return this.httpClient.post<BaseResponse<PermissionObject[]>>(`${environment.backendUrl}/api/permissionobjects`, permission)
       .pipe(
         catchError((error) => { return of(error.error) })
       )
@@ -30,7 +30,7 @@ export class PermissionObjectService {
       });
     }
 
-    return this.httpClient.get<BaseResponse<PermissionObject[]>>(`${environment.userServiceUrl}/api/permissionobjects`, { params }).pipe(
+    return this.httpClient.get<BaseResponse<PermissionObject[]>>(`${environment.backendUrl}/api/permissionobjects`, { params }).pipe(
       catchError(error => {
         return of(error.error)
       })

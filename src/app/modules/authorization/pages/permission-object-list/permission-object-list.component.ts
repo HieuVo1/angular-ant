@@ -46,7 +46,6 @@ export class PermissionObjectListComponent implements OnInit {
     ).subscribe(res => {
       if (res.isSuccess) {
         this.listOfData = res.data;
-        console.log(this.listOfData);
 
       }
     })

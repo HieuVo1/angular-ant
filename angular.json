@@ -4,6 +4,14 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular-ant": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "vi-VN": {
+            "translation": "src/locale/messages.vn.xlf"
+          }
+        }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,6 +21,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["en-US"],
             "outputPath": "dist/angular-ant",
             "index": "src/index.html",
             "main": "src/main.ts",

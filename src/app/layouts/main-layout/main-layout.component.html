@@ -4,31 +4,32 @@
     <div class="sidebar-logo">
       <a routerLink="/admin">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
+        <h1>DMS Authorization</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+      <li nz-submenu nzOpen nzTitle="Dashboard" i18n-nzTitle nzIcon="dashboard">
         <ul>
 
           <li *ngxPermissionsOnly="[permissionSchema.distributor, permissionSchema.all]" nz-menu-item nzMatchRouter>
-            <a routerLink="/admin/distributor">Distributor</a>
+            <a i18n routerLink="/admin/distributor">Distributor</a>
           </li>
           <li *ngxPermissionsOnly="[permissionSchema.item, permissionSchema.all]" nz-menu-item nzMatchRouter>
-            <a routerLink="/admin/item">Item</a>
+            <a i18n routerLink="/admin/item">Item</a>
           </li>
         </ul>
       </li>
-      <li *ngxPermissionsOnly="[permissionSchema.all]" nz-submenu nzOpen nzTitle="Authorization" nzIcon="team">
+      <li *ngxPermissionsOnly="[permissionSchema.all]" nz-submenu nzOpen nzTitle="Authorization" i18n-nzTitle
+        nzIcon="team">
         <ul>
           <li *ngxPermissionsOnly="[permissionSchema.all]" nz-menu-item nzMatchRouter>
-            <a routerLink="/admin/authorization/role">Role</a>
+            <a i18n routerLink="/admin/authorization/role">Role</a>
           </li>
           <li *ngxPermissionsOnly="[permissionSchema.all]" nz-menu-item nzMatchRouter>
-            <a routerLink="/admin/authorization/user">User</a>
+            <a i18n routerLink="/admin/authorization/user">User</a>
           </li>
           <li *ngxPermissionsOnly="[permissionSchema.all]" nz-menu-item nzMatchRouter>
-            <a routerLink="/admin/authorization/permission-object">Object</a>
+            <a i18n routerLink="/admin/authorization/permission-object">Object</a>
           </li>
         </ul>
       </li>
@@ -43,14 +44,26 @@
         <div class="user-info">
           <app-notification></app-notification>
 
-          <span nz-dropdown [nzDropdownMenu]="menu">
-            <img src="/assets/images/avatar.jpg" width="34" height="34">
+          <span nz-dropdown [nzDropdownMenu]="language">
+            Languages
+            <i nz-icon nzType="down"></i>
+          </span>
+          <nz-dropdown-menu #language="nzDropdownMenu">
+            <ul class="seller-feature" nz-menu>
+              <li nz-menu-item><a href="/vi-VN/">Vietnamese</a></li>
+              <li nz-menu-item><a href="/en-US/">English</a></li>
+            </ul>
+          </nz-dropdown-menu>
+
+          <span class="user-dropdown" nz-dropdown [nzDropdownMenu]="menu">
+            <img [src]="userImageUrl" width="34" height="34">
             {{userName}}
             <i nz-icon nzType="down"></i>
           </span>
           <nz-dropdown-menu #menu="nzDropdownMenu">
             <ul class="seller-feature" nz-menu>
-              <li nz-menu-item [routerLink]="['/admin/profile/change-password']">Change password</li>
+              <li nz-menu-item [routerLink]="['/admin/user/profile']">Profile</li>
+              <li nz-menu-item [routerLink]="['/admin/user/change-password']">Change password</li>
               <li nz-menu-item (click)="logout()">Logout</li>
             </ul>
           </nz-dropdown-menu>

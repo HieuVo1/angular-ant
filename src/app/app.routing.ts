@@ -20,8 +20,8 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/admin/item',
     pathMatch: 'full',
+    redirectTo: '/admin',
   },
   { path: '**', redirectTo: '/auth/login', pathMatch: 'full' }
 ]

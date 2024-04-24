@@ -13,13 +13,15 @@ import { Permission } from 'src/app/modules/authorization/models/permission';
 import { ObjectType } from 'src/app/modules/authorization/enums/object-type';
 import { PermissionObjectCreate } from 'src/app/modules/authorization/models/permission-object-create';
 import { Buttons } from 'src/permissions/permission-schema';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilitiesService {
 
-  constructor(private readonly storageService: StorageService) { }
+  constructor(private readonly httpClient: HttpClient) { }
+
 }
 
 export function jwtOptionsFactory(tokenService: TokenService) {
@@ -35,6 +37,7 @@ export function jwtOptionsFactory(tokenService: TokenService) {
 
 export function initializeAppFactory(tokenService: TokenService, roleService: RoleService, ps: NgxPermissionsService): () => Observable<BaseResponse<Role>> {
   const roleId = tokenService.getRoleId();
+  console.log(roleId);
 
   return () => roleService.getById(roleId)
     .pipe(

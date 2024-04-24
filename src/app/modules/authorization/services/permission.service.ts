@@ -14,27 +14,27 @@ export class PermissionService {
   constructor(private readonly httpClient: HttpClient) { }
 
   getAll(): Observable<BaseResponse<Permission[]>> {
-    return this.httpClient.get<BaseResponse<Permission[]>>(`${environment.userServiceUrl}/api/permissions`).pipe(
+    return this.httpClient.get<BaseResponse<Permission[]>>(`${environment.backendUrl}/api/permissions`).pipe(
       catchError((error) => of(error.error))
     )
   }
 
   update(permission: PermissionUpdate): Observable<BaseResponse<Permission[]>> {
-    return this.httpClient.patch<BaseResponse<Permission[]>>(`${environment.userServiceUrl}/api/permissions`, permission)
+    return this.httpClient.patch<BaseResponse<Permission[]>>(`${environment.backendUrl}/api/permissions`, permission)
       .pipe(
         catchError((error) => { return of(error.error) })
       )
   }
 
   add(permission: Permission): Observable<BaseResponse<Permission[]>> {
-    return this.httpClient.post<BaseResponse<Permission[]>>(`${environment.userServiceUrl}/api/permissions`, permission)
+    return this.httpClient.post<BaseResponse<Permission[]>>(`${environment.backendUrl}/api/permissions`, permission)
       .pipe(
         catchError((error) => { return of(error.error) })
       )
   }
 
   delete(roleId: number, permissionObjectId: number): Observable<BaseResponse<boolean>> {
-    return this.httpClient.delete<BaseResponse<boolean>>(`${environment.userServiceUrl}/api/permissions?roleId=${roleId}&permissionObjectId=${permissionObjectId}`)
+    return this.httpClient.delete<BaseResponse<boolean>>(`${environment.backendUrl}/api/permissions?roleId=${roleId}&permissionObjectId=${permissionObjectId}`)
       .pipe(
         catchError((error) => {
           return of(error.error);

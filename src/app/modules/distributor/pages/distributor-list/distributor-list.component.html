@@ -3,10 +3,18 @@
     nzType="primary" nz-button>
     Add <i nz-icon nzType="plus" nzTheme="outline"></i>
   </button>
-  <button *ngxPermissionsOnly="[permissionSchema.custom, permissionSchema.all]" (click)="addNew()" class="add-btn"
-    nzType="primary" nz-button>
-    Custom <i nz-icon nzType="plus" nzTheme="outline"></i>
+  <button *ngxPermissionsOnly="[permissionSchema.download, permissionSchema.all]" (click)="handleExport()"
+    class="add-btn" nzType="primary" nz-button>
+    Download
+    <span nz-icon nzType="download"></span>
   </button>
+  <nz-upload *ngxPermissionsOnly="[permissionSchema.upload, permissionSchema.all]" [nzBeforeUpload]="beforeUpload"
+    [nzAccept]="'.csv,.xlsx'">
+    <button nz-button [nzLoading]="uploadingFile">
+      <span nz-icon nzType="upload"></span>
+      Upload
+    </button>
+  </nz-upload>
 </div>
 <nz-table #nzTable nzSize="small" [nzFrontPagination]="false" [nzData]="listData" [nzTotal]="total" nzBordered
   [nzLoading]="isLoading" [nzPageSize]="baseParam.pageSize" [nzPageIndex]="baseParam.pageIndex"

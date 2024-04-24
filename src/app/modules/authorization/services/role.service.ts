@@ -12,7 +12,7 @@ export class RoleService {
   constructor(private readonly httpClient: HttpClient) { }
 
   getAll(): Observable<BaseResponse<Role[]>> {
-    return this.httpClient.get<BaseResponse<Role[]>>(`${environment.userServiceUrl}/api/roles`).pipe(
+    return this.httpClient.get<BaseResponse<Role[]>>(`${environment.backendUrl}/api/roles`).pipe(
       catchError(error => {
         return of(error.error)
       })
@@ -20,7 +20,7 @@ export class RoleService {
   }
 
   getById(roleId: number): Observable<BaseResponse<Role>> {
-    return this.httpClient.get<BaseResponse<Role>>(`${environment.userServiceUrl}/api/roles/${roleId}`).pipe(
+    return this.httpClient.get<BaseResponse<Role>>(`${environment.backendUrl}/api/roles/${roleId}`).pipe(
       catchError(error => {
         return of(error.error)
       })
@@ -28,14 +28,14 @@ export class RoleService {
   }
 
   add(role: Role): Observable<BaseResponse<Role>> {
-    return this.httpClient.post<BaseResponse<Role>>(`${environment.userServiceUrl}/api/roles`, role)
+    return this.httpClient.post<BaseResponse<Role>>(`${environment.backendUrl}/api/roles`, role)
       .pipe(
         catchError((error) => { return of(error.error) })
       )
   }
 
   update(role: Role): Observable<BaseResponse<Role>> {
-    return this.httpClient.patch<BaseResponse<Role>>(`${environment.userServiceUrl}/api/roles`, role)
+    return this.httpClient.patch<BaseResponse<Role>>(`${environment.backendUrl}/api/roles`, role)
       .pipe(
         catchError((error) => { return of(error.error) })
       )
@@ -43,7 +43,7 @@ export class RoleService {
 
 
   delete(roleId: number): Observable<BaseResponse<boolean>> {
-    return this.httpClient.delete<BaseResponse<boolean>>(`${environment.userServiceUrl}/api/roles/${roleId}`)
+    return this.httpClient.delete<BaseResponse<boolean>>(`${environment.backendUrl}/api/roles/${roleId}`)
       .pipe(
         catchError((error) => {
           return of(error.error);

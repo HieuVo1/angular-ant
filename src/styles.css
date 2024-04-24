@@ -136,7 +136,7 @@
 .table-operations {
   margin-bottom: 16px;
   float: right;
-  height: 45px;
+  /* height: 45px; */
 }
 
 .table-operations > button {
@@ -148,7 +148,7 @@
   height: 30px;
   padding: 4px 8px;
   font-size: 13px;
-  margin-right: 6px;
+  margin: 3px;
 }
 
 .btn-action .ant-btn .anticon {
@@ -226,4 +226,15 @@
 .radio-btn .ant-form-item-control-input-content {
   display: flex;
   justify-content: center;
+}
+
+/* nz upload */
+.user-profile-image .ant-upload-list-picture-card-container {
+  width: 200px;
+  height: 200px;
+}
+
+.user-profile-image .ant-upload.ant-upload-select-picture-card {
+  width: 200px;
+  height: 200px;
 }

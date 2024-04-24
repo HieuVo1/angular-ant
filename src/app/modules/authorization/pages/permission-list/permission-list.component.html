@@ -49,7 +49,7 @@
               <td [(nzChecked)]="data.viewPermission"
                 (nzCheckedChange)="refreshStatus(data.permissionObjectId ,$event)"></td>
               <td nzAlign="center" class="btn-action">
-                <button *ngIf="!data.parentPermissionObjId" nz-button nzType="primary"
+                <button *ngIf="data.type == ObjectTypes.Page || data.type == ObjectTypes.All" nz-button nzType="primary"
                   nzPopconfirmOverlayClassName="delete-confirm-card" nz-popconfirm
                   nzPopconfirmTitle="Are you sure delete this permission?" nzPopconfirmPlacement="left"
                   (nzOnConfirm)="delete( data.permissionObjectId)" nzDanger>Delete<i nz-icon nzType="delete"
